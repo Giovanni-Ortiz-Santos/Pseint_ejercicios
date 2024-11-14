@@ -34,8 +34,16 @@ Algoritmo Sitemas_Trabajadores
 		no_valido = "El numero introducido es correcto"
 	FinSi
 	
-
 	sueldo_total_Horas_Normales_Extras = sueldo_horas_normales + pago_total_horas_extras
+	
+	si sueldo_total_Horas_Normales_Extras <= 2500 Entonces
+		descuento_imss = sueldo_total_Horas_Normales_Extras * .04		
+	SiNo
+		descuento_imss = sueldo_total_Horas_Normales_Extras * .07		
+	FinSi
+	
+	descuento_imss_final = sueldo_total_Horas_Normales_Extras - descuento_imss
+	
 	
 	Segun dias_trabajados hacer 
 		1:
@@ -131,9 +139,9 @@ Algoritmo Sitemas_Trabajadores
 			Imprimir no_valido			
 			Imprimir  "Ingrese el numero de dias trabajados en un rango de 1-6"
 			
-	FinSegun
+	FinSegun	
 	
-	Imprimir "El pago de tus horas normales es de: $", sueldo_horas_normales
-	Imprimir "Total del pago de horas extras es de: $" pago_total_horas_extras
+	Imprimir "Tu descuento de imss es de: ", descuento_imss
+	Imprimir "Tu desceunto final con imss es de. ", descuento_imss_final
 	
 FinAlgoritmo
