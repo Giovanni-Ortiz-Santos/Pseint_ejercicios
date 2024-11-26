@@ -2,6 +2,15 @@ Algoritmo Sitemas_Trabajadores
 	Definir nombre_del_trabajador, direccion, puesto Como Caracter
 	Definir sueldo_semanal, dias_trabajados, horas_extras_trabajadas Como Real		
 	
+	Escribir "Ingrese el nombre del trabajador: "	
+	leer nombre_del_trabajador 
+	
+	Escribir "Ingrese la direccion del trabajador: "
+	leer direccion 
+	
+	Escribir "Ingrese el puesto de trabajador: "
+	leer puesto 
+	
 	Escribir "Sueldo semanal: "
 	leer sueldo_semanal
 	
@@ -37,13 +46,20 @@ Algoritmo Sitemas_Trabajadores
 	sueldo_total_Horas_Normales_Extras = sueldo_horas_normales + pago_total_horas_extras
 	
 	si sueldo_total_Horas_Normales_Extras <= 2500 Entonces
-		descuento_imss = sueldo_total_Horas_Normales_Extras * .04		
+		descuento_LISR = sueldo_total_Horas_Normales_Extras * .04		
 	SiNo
-		descuento_imss = sueldo_total_Horas_Normales_Extras * .07		
+		descuento_LISR = sueldo_total_Horas_Normales_Extras * .07		
 	FinSi
 	
-	descuento_imss_final = sueldo_total_Horas_Normales_Extras - descuento_imss
+	si sueldo_total_Horas_Normales_Extras <= 3000 Entonces
+		descuento_imss = sueldo_total_Horas_Normales_Extras * .03		
+	SiNo
+		descuento_imss = sueldo_total_Horas_Normales_Extras * .05		
+	FinSi
 	
+	descuentoSindical = sueldo_total_Horas_Normales_Extras * .02
+	descuentosFinales = descuento_imss + descuento_LISR + descuentoSindical
+	pago_final = sueldo_total_Horas_Normales_Extras -descuentosFinales
 	
 	Segun dias_trabajados hacer 
 		1:
@@ -141,7 +157,11 @@ Algoritmo Sitemas_Trabajadores
 			
 	FinSegun	
 	
+	Imprimir "Total a pagar (horas extras y normales): ", sueldo_total_Horas_Normales_Extras
+	Imprimir "Tu descuento de LISR es de: ", descuento_LISR
 	Imprimir "Tu descuento de imss es de: ", descuento_imss
-	Imprimir "Tu desceunto final con imss es de. ", descuento_imss_final
+	Imprimir "Descuento sindical de: ", descuentoSindical
+	Imprimir "Tus descuentos finales son de es de. ", descuentosFinales
+	Imprimir "Pago final con descuentos y horas extras trabajadas es de: ", pago_final
 	
 FinAlgoritmo
