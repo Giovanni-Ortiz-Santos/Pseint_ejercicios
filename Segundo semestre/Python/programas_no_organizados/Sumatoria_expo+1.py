@@ -2,6 +2,7 @@
 # Sumatoria de exponentes n = n+1 entre n
 
 #variables
+
 a = 1
 n_valor = int(input("Dime el numero de sumatoria que nesesites: "))
 sumatoria = 0
