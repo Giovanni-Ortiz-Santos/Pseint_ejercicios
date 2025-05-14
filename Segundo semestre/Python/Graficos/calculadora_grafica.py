@@ -1,17 +1,44 @@
 import tkinter as tk
-from tkinter import messagebox
 
-ventanaCalculadora = tk.Tk()
-ventanaCalculadora.title("Calculadora ISIC")
-ventanaCalculadora.configure(bg="blue")
-ventanaCalculadora.geometry("600x600")
+def click_button(valor):
+    entry.insert(tk.END, valor)
 
-labelEntry = tk.Label(width=30, height=3, text="0",anchor="e", font=("Arial",20,"bold")).pack(pady=50)
-boton1 = tk.Button(text="1", font=("Arial", 14,"bold"), width=5, height=2).pack(side="left",padx=10)
-boton2 = tk.Button(text="2", font=("Arial", 14,"bold"), width=5, height=2).pack(side="left",padx=10)
-boton3 = tk.Button(text="3", font=("Arial", 14,"bold"), width=5, height=2).pack(side="left",padx=10)
-boton4 = tk.Button(text="4", font=("Arial", 14,"bold"), width=5, height=2).pack(side="left",padx=10)
+def calcular():
+    try:
+        resultado = eval(entry.get())
+        entry.delete(0, tk.END)
+        entry.insert(tk.END, resultado)
+    except:
+        entry.delete(0, tk.END)
+        entry.insert(tk.END, "Error")
 
+def borrar():
+    entry.delete(0, tk.END)
 
+ventana = tk.Tk()
+ventana.config(bg="yellow")
+ventana.title("Calculadora")
 
-ventanaCalculadora.mainloop()
+entry = tk.Entry(ventana, width=40, font=('Arial', 14), borderwidth=5)
+entry.grid(row=0, column=0, columnspan=4)
+
+botones = [
+    ('7', 1, 0), ('8', 1, 1), ('9', 1, 2), ('/', 1, 3),
+    ('4', 2, 0), ('5', 2, 1), ('6', 2, 2), ('*', 2, 3),
+    ('1', 3, 0), ('2', 3, 1), ('3', 3, 2), ('-', 3, 3),
+    ('0', 4, 0), ('.', 4, 1), ('+', 4, 2), ('=', 4, 3),
+    ('**',5,0)
+
+]
+
+for texto, fila, columna in botones:
+    if texto == '=':
+        boton = tk.Button(ventana, text=texto, width=10, height=5, command=calcular)
+    else:
+        boton = tk.Button(ventana, text=texto, width=10, height=5,  command=lambda t=texto: click_button(t))
+    boton.grid(row=fila, column=columna)
+
+boton_borrar = tk.Button(ventana, text="C", width=10, height=5, command=borrar)
+boton_borrar.grid(row=5, column=0, columnspan=4)
+
+ventana.mainloop()
